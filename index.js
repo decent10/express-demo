@@ -3,6 +3,8 @@ const express = require('express');
 const   bodyParser = require('body-parser');
 const app = express();
 
+app.set('view engine', 'pug');
+
 const users = [
     {id:1, name: 'jhone', age: 33},
 {
@@ -26,7 +28,16 @@ app.use(bodyParser.urlencoded({
 }))
 app.get('/',(req, res)=>{
 
-    res.send('<h1>Hello first express app</h1>')
+
+    res.render('index',{pageTitle:'Hello world', users});
+})
+app.get('/profile/:id', (req, res) => {
+    console.log(req.params)
+const user = users.find(u => {
+    return u.id === parseInt(req.params.id);
+})
+console.log(user);
+    res.render('profile', {user:user});
 })
 
 app.get('/about', (req, res) => {

@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    
+  body
+    h1 Pug - node template engine
+    #container.col
+        ul
+            each user in users
+                li= user.name
+                    button(data-id=`${user.id}`).delete delete
+                    a(href=`/profile/${user.id}`) view profile
